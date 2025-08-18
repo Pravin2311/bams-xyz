@@ -1008,7 +1008,7 @@ body::before {
 .pulse-card {
     padding: 2rem;
     border-radius: 15px;
-    color: rgb(46, 17, 17);
+    color: white;
     text-align: center;
 }
 
@@ -1533,56 +1533,13 @@ body::before {
         box-shadow: 0 4px 15px rgba(255, 153, 51, 0.2);
     }
 
+    /* Hide navigation completely on mobile */
     .mobile-menu-toggle {
-        display: flex !important;
-        position: fixed !important;
-        right: 1.5rem !important;
-        top: 1.5rem !important;
-        transform: none !important;
-        background: linear-gradient(135deg, #FF9933 0%, #DAA520 100%) !important;
-        border: 3px solid #8B4513 !important;
-        border-radius: 15px !important;
-        padding: 1.2rem !important;
-        box-shadow: 0 6px 25px rgba(255, 153, 51, 0.5) !important;
-        z-index: 10000 !important;
-        width: 60px !important;
-        height: 60px !important;
-        justify-content: center !important;
-        align-items: center !important;
+        display: none !important;
     }
     
-    /* Enhanced mobile menu visibility */
     .nav-menu {
-        background: rgba(255, 255, 255, 0.98) !important;
-        backdrop-filter: blur(10px) !important;
-        border: 2px solid #DAA520 !important;
-        border-radius: 15px !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-        margin-top: 1rem !important;
-        padding: 1.5rem !important;
-    }
-    
-    .nav-menu.active {
-        animation: slideDown 0.3s ease-out;
-    }
-    
-    .nav-menu a {
-        padding: 1rem !important;
-        margin: 0.5rem 0 !important;
-        border-radius: 10px !important;
-        background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%) !important;
-        border: 2px solid #DAA520 !important;
-        display: block !important;
-        text-align: center !important;
-        font-weight: 700 !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .nav-menu a:hover {
-        background: linear-gradient(135deg, #FF9933 0%, #DAA520 100%) !important;
-        color: #ffffff !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 15px rgba(255, 153, 51, 0.4) !important;
+        display: none !important;
     }
 }
 
@@ -3310,10 +3267,13 @@ button:hover, .btn:hover, .cta-button:hover, .tool-button:hover, .back-button:ho
         border-radius: 4px !important;
     }
     
-    .nav-menu a {
-        font-size: 1.1rem !important;
-        padding: 1.25rem !important;
-        margin: 0.75rem 0 !important;
+    /* Continue hiding navigation on smaller mobile screens */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .nav-menu {
+        display: none !important;
     }
 }
 
