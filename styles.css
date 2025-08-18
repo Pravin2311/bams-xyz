@@ -1008,7 +1008,7 @@ body::before {
 .pulse-card {
     padding: 2rem;
     border-radius: 15px;
-    color: white;
+    color: rgb(41, 15, 15);
     text-align: center;
 }
 
