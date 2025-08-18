@@ -1,6 +1,3 @@
-# Apache .htaccess for bams.xyz Static Site
-# Optimizes performance and handles common deployment scenarios
-
 # Enable compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
@@ -14,31 +11,27 @@
     AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
 
-# Set expiry headers for better caching
-<IfModule mod_expires.c>
-    ExpiresActive on
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType application/json "access plus 1 month"
-    ExpiresByType text/html "access plus 1 day"
+# Set proper MIME types for XML files
+<IfModule mod_mime.c>
+    AddType application/xml .xml
+    AddType text/xml .xml
 </IfModule>
 
-# Security headers
-<IfModule mod_headers.c>
-    Header always set X-Content-Type-Options nosniff
-    Header always set X-Frame-Options DENY
-    Header always set X-XSS-Protection "1; mode=block"
-</IfModule>
+# Cache control for sitemap
+<Files "sitemap.xml">
+    Header set Cache-Control "max-age=86400, public"
+</Files>
 
-# Redirect all requests to index.html for SPA behavior
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-    RewriteRule ^index\.html$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /index.html [L]
-</IfModule>
+<Files "sitemap-index.xml">
+    Header set Cache-Control "max-age=86400, public"
+</Files>
 
-# Custom error pages
-ErrorDocument 404 /index.html
+# Redirect to clean URLs
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.html [NC,L]
+
+# Force HTTPS (if applicable)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
